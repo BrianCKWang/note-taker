@@ -64,8 +64,6 @@ const getNewUuid = () =>
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
-  console.log(activeNote);
-
   if (activeNote.id) {
     // noteTitle.setAttribute('readonly', true);
     // noteText.setAttribute('readonly', true);
@@ -124,7 +122,6 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
-  console.log("handleNoteView");
   e.preventDefault();
 
   if(JSON.parse(e.target.parentElement.getAttribute('data-note'))){
