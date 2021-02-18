@@ -111,7 +111,13 @@ const handleNoteDelete = (e) => {
 
   
   deleteNote(noteId).then(() => {
-    getAndRenderNotes();
+    if(noteId == activeNote.id){
+      getAndRenderNotesThenClear();
+    }
+    else{
+      getAndRenderNotes();
+    }
+    
     renderActiveNote();
   });
 };
@@ -202,6 +208,7 @@ const renderNoteList = async (notes) => {
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotesThenClear = () => getNotes().then(renderNoteList).then(handleNewNoteView);
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
