@@ -16,12 +16,17 @@ if (window.location.pathname === '/notes') {
 
 // Show an element
 const show = (elem) => {
-  elem.style.display = 'inline';
+  if(elem !== undefined){
+    elem.style.display = 'inline';
+  }
+  
 };
 
 // Hide an element
 const hide = (elem) => {
-  elem.style.display = 'none';
+  if(elem !== undefined){
+    elem.style.display = 'none';
+  }
 };
 
 // activeNote is used to keep track of the note in the textarea
@@ -215,6 +220,7 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+
+  getAndRenderNotesThenClear();
 }
 
-getAndRenderNotesThenClear();
