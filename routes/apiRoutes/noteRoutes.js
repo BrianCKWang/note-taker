@@ -7,12 +7,6 @@ const { route } = require('.');
 
 router.get('/notes/', (req, res) => {
   let results = notes;
-
-  // console.log(notes);
-  
-  if(req.query){
-    results = filterByQuery(req.query, results);
-  }
   
   res.json(results);
 });
