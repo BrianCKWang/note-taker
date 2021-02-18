@@ -1,4 +1,4 @@
-const { filterByQuery, findById, createNewNote, validateNote, deleteNote } = require('../../lib/notes');
+const { findById, createNewNote, validateNote, deleteNote } = require('../../lib/notes');
 const { notes } = require('../../db/db');
 const router = require('express').Router();
 const { route } = require('.');
