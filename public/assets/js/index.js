@@ -1,4 +1,4 @@
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
 
 let noteTitle;
 let noteText;
@@ -27,15 +27,16 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-const getNotes = () =>
+const getNotes = () => 
   fetch('/api/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+  }
+);
 
-const saveNote = (note) =>
+const saveNote = (note) => 
   fetch('/api/notes', {
     method: 'POST',
     headers: {
@@ -52,17 +53,39 @@ const deleteNote = (id) =>
     },
   });
 
+const getNewUuid = () =>
+  fetch(`/api/uuid/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
+  console.log(activeNote);
+
   if (activeNote.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
+    // noteTitle.setAttribute('readonly', true);
+    // noteText.setAttribute('readonly', true);
     noteTitle.value = activeNote.title;
-    noteText.value = activeNote.title;
+    noteText.value = activeNote.text;
+    
   } else {
     noteTitle.value = '';
     noteText.value = '';
+    getNewUuid()
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      alert('Error: ' + response.statusText);
+    })
+    .then(newID => {
+      activeNote.id = newID;
+    });
+
   }
 };
 
@@ -70,7 +93,10 @@ const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
+    id: activeNote.id
   };
+  activeNote.title = newNote.title;
+  activeNote.text = newNote.text;
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -89,6 +115,7 @@ const handleNoteDelete = (e) => {
     activeNote = {};
   }
 
+  
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -97,8 +124,16 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
+  console.log("handleNoteView");
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+
+  if(JSON.parse(e.target.parentElement.getAttribute('data-note'))){
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  }
+  if(JSON.parse(e.target.getAttribute('data-note'))){
+    activeNote = JSON.parse(e.target.getAttribute('data-note'));
+  }
+  
   renderActiveNote();
 };
 
@@ -119,6 +154,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -129,6 +165,7 @@ const renderNoteList = async (notes) => {
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
     liEl.classList.add('list-group-item');
+    liEl.addEventListener('click', handleNoteView);
 
     const spanEl = document.createElement('span');
     spanEl.innerText = text;
@@ -156,8 +193,9 @@ const renderNoteList = async (notes) => {
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
   }
-
+  
   jsonNotes.forEach((note) => {
+    
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
 
@@ -180,3 +218,4 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+// console.log(uuidv4());
