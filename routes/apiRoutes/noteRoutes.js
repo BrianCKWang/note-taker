@@ -5,9 +5,12 @@ const router = require('express').Router();
 router.get('/notes/', (req, res) => {
   let results = notes;
 
+  console.log(notes);
+  
   if(req.query){
     results = filterByQuery(req.query, results);
   }
+  
   res.json(results);
 });
 

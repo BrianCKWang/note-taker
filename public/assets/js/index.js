@@ -1,3 +1,5 @@
+const { json } = require("body-parser");
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
