@@ -1,12 +1,12 @@
 {
   "notes": [
     {
-      "title": "Test Title 1",
-      "text": "Testing text area",
+      "title": "To Do for Today",
+      "text": "Eat vegetables",
       "id": "bb1963c3-bb81-48b0-a5a1-752e79bcacfe"
     },
     {
-      "title": "Test Title 2",
+      "title": "Tomorrow",
       "text": "Test text",
       "id": "bg1963c3-bb81-48b0-a5a1-752e79bcacfe"
     },
