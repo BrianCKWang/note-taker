@@ -6,8 +6,8 @@ Live application is deployed on Heroku.
 ![main pic](https://github.com/BrianCKWang/note-taker/blob/main/src/img/main-01.png)
 
 ## Table of Contents
-* [Usage](#usage)
 * [Installation](#installation)
+* [Usage](#usage)
 * [Contribution Guidelines](#contribution-guidelines)
 * [Questions](#questions)
 * [License](#license)
@@ -24,7 +24,7 @@ Live application is deployed on Heroku.
   1. RUn "npm install" to install project dependencies
   1. Run "npm start"
   1. Open browser and type address "http://localhost:3002/"
-  
+
 ### Use live deployed application
   1. Go to [Link](https://brianckwang-note-taker.herokuapp.com/)
   
