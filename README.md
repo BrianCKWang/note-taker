@@ -21,7 +21,7 @@ Live application is deployed on Heroku.
   1. Unzip to preferred location
   1. Open console
   1. Navigate to project root directory
-  1. RUn "npm install" to install project dependencies
+  1. Run "npm install" to install project dependencies
   1. Run "npm start"
   1. Open browser and type address "http://localhost:3002/"
 
